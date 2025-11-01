@@ -1,0 +1,39 @@
+[project]
+name = "fund-lens-models"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "Tom Boone",email = "tbc@tomboone.com"}
+]
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "sqlalchemy (>=2.0.44,<3.0.0)",
+    "alembic (>=1.17.1,<2.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.dev.dependencies]
+pre-commit = "^4.3.0"
+ruff = "^0.14.2"
+bandit = "^1.8.6"
+mypy = "^1.18.2"
+pytest = "^8.4.2"
+sqlalchemy-stubs = "^0.4"  # Better type hints
+
+[tool.mypy]
+plugins = ["sqlalchemy.ext.mypy.plugin"]
+
+[tool.ruff]
+line-length = 100  # Increase from 88 to reduce line-too-long errors
+
+[tool.ruff.lint]  # Move under 'lint' section
+select = ["E", "F", "I", "UP", "B", "C4", "SIM"]
+ignore = ["E501"]  # Ignore line-too-long errors
+
+[tool.ruff.lint.isort]  # Move under 'lint.isort'
+known-first-party = ["fund_lens_etl"]
