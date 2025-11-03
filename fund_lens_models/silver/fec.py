@@ -111,6 +111,7 @@ class SilverFECCommittee(Base, TimestampMixin):
     name: Mapped[str] = mapped_column(String(500), nullable=False)
     committee_type: Mapped[str | None] = mapped_column(String(1))
     designation: Mapped[str | None] = mapped_column(String(1))
+    party: Mapped[str | None] = mapped_column(String(10))  # Committee party affiliation
 
     # Location
     state: Mapped[str | None] = mapped_column(String(2), index=True)
@@ -119,6 +120,9 @@ class SilverFECCommittee(Base, TimestampMixin):
 
     # Treasurer
     treasurer_name: Mapped[str | None] = mapped_column(String(500))
+
+    # Affiliated candidate (primary candidate from bronze candidate_ids array)
+    candidate_id: Mapped[str | None] = mapped_column(String(20), index=True)
 
     # Status
     is_active: Mapped[bool] = mapped_column(default=True, nullable=False)
