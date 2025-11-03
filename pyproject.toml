@@ -1,6 +1,6 @@
 [project]
 name = "fund-lens-models"
-version = "0.1.0"
+version = "0.1.1"
 description = ""
 authors = [
     {name = "Tom Boone",email = "tbc@tomboone.com"}
