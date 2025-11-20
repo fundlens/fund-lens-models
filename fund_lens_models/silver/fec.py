@@ -60,6 +60,7 @@ class SilverFECContribution(Base, TimestampMixin):
     # Transaction details
     receipt_type: Mapped[str | None] = mapped_column(String(10))
     election_type: Mapped[str | None] = mapped_column(String(10))
+    memo_code: Mapped[str | None] = mapped_column(String(10))  # X = has memo
     memo_text: Mapped[str | None] = mapped_column(Text)
 
     # Metadata

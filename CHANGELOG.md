@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.0] - 2025-11-20
+
+### Added
+- Added `memo_code` field to `SilverFECContribution` to support earmark detection
+- Added `source_sub_id` field to `GoldContribution` for unique record identification
+- Added index on `source_transaction_id` in `GoldContribution` for efficient earmark pair queries
+
+### Changed
+- Updated `GoldContribution` unique constraint to use `source_sub_id` instead of `source_transaction_id`
+- Enhanced `source_transaction_id` field documentation to clarify it links related records (earmark pairs)
+
+### Fixed
+- Corrected field usage: `source_sub_id` (unique ID) vs `source_transaction_id` (links pairs)
+
 ## [0.1.1] - 2025-11-03
 
 ### Changed

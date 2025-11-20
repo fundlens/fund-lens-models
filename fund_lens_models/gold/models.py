@@ -115,7 +115,7 @@ class GoldContribution(Base, TimestampMixin):
 
     __tablename__ = "gold_contribution"
     __table_args__ = (
-        UniqueConstraint("source_system", "source_transaction_id", name="uq_source_transaction"),
+        UniqueConstraint("source_system", "source_sub_id", name="uq_source_transaction"),
     )
 
     # Primary key
@@ -125,7 +125,12 @@ class GoldContribution(Base, TimestampMixin):
     source_system: Mapped[str] = mapped_column(
         String(50), nullable=False, index=True
     )  # FEC, MD_STATE, VA_STATE, etc.
-    source_transaction_id: Mapped[str] = mapped_column(String(255), nullable=False)
+    source_sub_id: Mapped[str] = mapped_column(
+        String(255), nullable=False
+    )  # Unique record ID (FEC sub_id)
+    source_transaction_id: Mapped[str] = mapped_column(
+        String(255), nullable=False, index=True
+    )  # Links related records (e.g., earmark pairs)
 
     # Contribution details
     contribution_date: Mapped[date] = mapped_column(Date, nullable=False, index=True)
