@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.3] - 2025-11-22
+
+### Changed
+- Made `name` nullable in both `SilverFECCommittee` and `GoldCommittee` to handle rare cases where committee name is not provided in source data
+
 ## [0.2.2] - 2025-11-22
 
 ### Changed

@@ -109,8 +109,8 @@ class SilverFECCommittee(Base, TimestampMixin):
     # Source reference
     source_committee_id: Mapped[str] = mapped_column(String(20), unique=True, index=True)
 
-    # Committee information (required)
-    name: Mapped[str] = mapped_column(String(500), nullable=False)
+    # Committee information (name can be NULL in rare cases)
+    name: Mapped[str | None] = mapped_column(String(500))
     committee_type: Mapped[str | None] = mapped_column(String(1))
     designation: Mapped[str | None] = mapped_column(String(1))
     party: Mapped[str | None] = mapped_column(String(10))  # Committee party affiliation

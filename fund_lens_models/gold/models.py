@@ -81,8 +81,8 @@ class GoldCommittee(Base, TimestampMixin):
     # Primary key
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
 
-    # Committee identity
-    name: Mapped[str] = mapped_column(String(500), nullable=False, index=True)
+    # Committee identity (name can be NULL in rare cases)
+    name: Mapped[str | None] = mapped_column(String(500), index=True)
     committee_type: Mapped[str] = mapped_column(
         String(50), nullable=False, index=True
     )  # CANDIDATE, PAC, PARTY, SUPER_PAC, etc.
