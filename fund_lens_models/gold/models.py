@@ -128,9 +128,9 @@ class GoldContribution(Base, TimestampMixin):
     source_sub_id: Mapped[str] = mapped_column(
         String(255), nullable=False
     )  # Unique record ID (FEC sub_id)
-    source_transaction_id: Mapped[str] = mapped_column(
-        String(255), nullable=False, index=True
-    )  # Links related records (e.g., earmark pairs)
+    source_transaction_id: Mapped[str | None] = mapped_column(
+        String(255), index=True
+    )  # Links related records (e.g., earmark pairs) - nullable for API data without transaction_id
 
     # Contribution details
     contribution_date: Mapped[date] = mapped_column(Date, nullable=False, index=True)

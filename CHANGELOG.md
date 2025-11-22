@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.1] - 2025-11-22
+
+### Changed
+- Made `transaction_id` nullable in `SilverFECContribution` to support both API and bulk file sources
+  - API-sourced records may not have `transaction_id` populated
+  - Bulk file records reliably include `transaction_id`
+- Made `source_transaction_id` nullable in `GoldContribution` to accept silver records without `transaction_id`
+
+### Fixed
+- Fixed schema compatibility issue preventing transformation of API-sourced records that lack `transaction_id`
+
 ## [0.2.0] - 2025-11-20
 
 ### Added

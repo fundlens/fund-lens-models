@@ -20,7 +20,8 @@ class SilverFECContribution(Base, TimestampMixin):
     source_sub_id: Mapped[str] = mapped_column(String(255), unique=True, index=True)
 
     # Transaction identifiers
-    transaction_id: Mapped[str] = mapped_column(String(255), nullable=False)
+    # Note: transaction_id may be null for API-sourced data (only bulk files reliably have it)
+    transaction_id: Mapped[str | None] = mapped_column(String(255))
     file_number: Mapped[int | None] = mapped_column(Integer)
     amendment_indicator: Mapped[str | None] = mapped_column(String(10))
 
