@@ -43,7 +43,7 @@ class SilverFECContribution(Base, TimestampMixin):
     contributor_occupation: Mapped[str] = mapped_column(
         String(255), nullable=False, default="NOT PROVIDED"
     )
-    entity_type: Mapped[str] = mapped_column(String(10), nullable=False)  # IND, ORG, etc.
+    entity_type: Mapped[str | None] = mapped_column(String(10))  # IND, ORG, etc. - nullable
 
     # Committee information (recipient) - enriched from bronze_fec_committee
     committee_id: Mapped[str] = mapped_column(String(20), nullable=False, index=True)

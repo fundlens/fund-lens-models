@@ -32,9 +32,7 @@ class GoldContributor(Base, TimestampMixin):
     occupation: Mapped[str | None] = mapped_column(String(255))
 
     # Type
-    entity_type: Mapped[str] = mapped_column(
-        String(20), nullable=False
-    )  # INDIVIDUAL, COMMITTEE, ORG, etc.
+    entity_type: Mapped[str | None] = mapped_column(String(20))  # INDIVIDUAL, COMMITTEE, ORG, etc.
 
     # Deduplication metadata
     match_confidence: Mapped[float | None] = mapped_column(
