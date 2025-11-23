@@ -45,6 +45,29 @@ class BronzeFECScheduleA(Base, TimestampMixin, SourceMetadataMixin):
     recipient_committee_type: Mapped[str | None] = mapped_column(String(10))
     recipient_committee_org_type: Mapped[str | None] = mapped_column(String(10))
 
+    # Candidate information (for committee-to-candidate contributions)
+    # Present in both API and pas2 bulk files
+    candidate_id: Mapped[str | None] = mapped_column(String(20), index=True)
+
+    # Transaction identifiers and metadata
+    # Present in both API and bulk files
+    image_number: Mapped[str | None] = mapped_column(String(20))  # FEC image/document number
+
+    # Bulk-file-only fields (not in API responses)
+    other_id: Mapped[str | None] = mapped_column(
+        String(20)
+    )  # Other committee/candidate ID (bulk only)
+
+    # Derived or API-only fields
+    is_individual: Mapped[bool | None] = (
+        mapped_column()
+    )  # API: direct field, Bulk: derived from entity_type == 'IND'
+    line_number: Mapped[str | None] = mapped_column(String(10))  # FEC form line number (API only)
+    pdf_url: Mapped[str | None] = mapped_column(String(500))  # Link to filing PDF (API only)
+    original_sub_id: Mapped[str | None] = mapped_column(
+        String(255)
+    )  # Original submission ID if amended (API only)
+
     # Transaction details
     receipt_type: Mapped[str | None] = mapped_column(String(10))
     election_type: Mapped[str | None] = mapped_column(String(10))

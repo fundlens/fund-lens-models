@@ -2,6 +2,27 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.2.4] - 2025-11-23
+
+### Added
+- Added `candidate_id` field to `BronzeFECScheduleA` for committee-to-candidate contributions (present in both API and pas2 bulk files)
+- Added `image_number` field to `BronzeFECScheduleA` for FEC document/image reference (present in both API and bulk files)
+- Added `other_id` field to `BronzeFECScheduleA` for other committee/candidate ID references (bulk files only)
+- Added `is_individual` field to `BronzeFECScheduleA` to flag individual contributors (API: direct field, Bulk: derived from entity_type == 'IND')
+- Added `line_number` field to `BronzeFECScheduleA` for FEC form line number (API only)
+- Added `pdf_url` field to `BronzeFECScheduleA` for direct link to filing PDF (API only)
+- Added `original_sub_id` field to `BronzeFECScheduleA` to track original submission ID for amendments (API only)
+
+### Fixed
+- Removed incorrect `transaction_type` field that was creating data inconsistency between API and bulk sources
+  - Bulk files use `TRANSACTION_TP` column which maps to existing `receipt_type` field (same as API)
+  - This ensures consistent field naming between API and bulk data sources
+
+### Notes
+- These additions enable complete data capture from both FEC API and bulk file sources
+- Supports all three bulk contribution file types: indiv (individual→committee), pas2 (committee→candidate), oth (committee→committee)
+- Fields are clearly documented as source-specific (API-only, bulk-only) or universal (both sources)
+
 ## [0.2.3] - 2025-11-22
 
 ### Changed
