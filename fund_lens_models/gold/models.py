@@ -3,7 +3,7 @@
 from datetime import date
 from decimal import Decimal
 
-from sqlalchemy import Date, Integer, Numeric, String, Text, UniqueConstraint
+from sqlalchemy import Boolean, Date, Integer, Numeric, String, Text, UniqueConstraint
 from sqlalchemy.orm import Mapped, mapped_column
 
 from fund_lens_models.base import Base, TimestampMixin
@@ -138,6 +138,12 @@ class GoldContribution(Base, TimestampMixin):
     contributor_id: Mapped[int] = mapped_column(Integer, nullable=False, index=True)
     recipient_committee_id: Mapped[int] = mapped_column(Integer, nullable=False, index=True)
     recipient_candidate_id: Mapped[int | None] = mapped_column(Integer, index=True)
+
+    # Earmark tracking - for contributions made via a conduit (ActBlue, WinRed, etc.)
+    conduit_committee_id: Mapped[int | None] = mapped_column(Integer, index=True)
+    is_earmark_receipt: Mapped[bool] = mapped_column(
+        Boolean, nullable=False, default=False, index=True
+    )  # True for 15E records that have a matching earmark - should be excluded from stats
 
     # Transaction classification
     contribution_type: Mapped[str] = mapped_column(

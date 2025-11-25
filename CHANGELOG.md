@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.3.0] - 2025-11-25
+
+### Added
+- Added `conduit_committee_id` field to `GoldContribution` to track contributions made via conduits (ActBlue, WinRed, etc.)
+- Added `is_earmark_receipt` boolean field to `GoldContribution` to mark 15E receipt records that should be excluded from contribution statistics
+  - When `is_earmark_receipt=TRUE`, the record represents a receipt notification and should not be counted in totals
+  - This prevents double-counting of earmarked contributions which appear twice in FEC data
+
+### Notes
+- Earmarked contributions in FEC data appear as two records:
+  1. A 15E receipt record (type `15E`) when the committee receives notification
+  2. The actual earmark record (transaction_id ending with `E`) representing the contribution
+- The `is_earmark_receipt` flag allows filtering out the duplicate 15E records
+- The `conduit_committee_id` field enables reporting on contributions by conduit/payment processor
+
 ## [0.2.4] - 2025-11-23
 
 ### Added
