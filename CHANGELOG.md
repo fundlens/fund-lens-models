@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.4.0] - 2025-11-29
+
+### Added
+- Added Maryland campaign finance bronze layer models:
+  - `BronzeMarylandContribution` - Raw contribution records from MDCRIS with content hash for deduplication
+  - `BronzeMarylandCommittee` - Raw committee records from MDCRIS with CCF ID as natural key
+  - `BronzeMarylandCandidate` - Raw candidate records from Maryland SBE with content hash for deduplication
+  - `BronzeMarylandExtractionState` - Extraction state tracking for Maryland data sources
+
+### Notes
+- Maryland contributions lack unique IDs in source data, requiring content hash-based deduplication
+- Maryland committees use CCF ID as the unique identifier
+- Candidate data is sourced from Maryland State Board of Elections (elections.maryland.gov), separate from MDCRIS
+
 ## [0.3.0] - 2025-11-25
 
 ### Added
