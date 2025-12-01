@@ -57,7 +57,7 @@ class GoldCandidate(Base, TimestampMixin):
         String(20), nullable=False, index=True
     )  # HOUSE, SENATE, PRESIDENT, GOVERNOR, etc.
     state: Mapped[str | None] = mapped_column(String(2), index=True)
-    district: Mapped[str | None] = mapped_column(String(10))
+    district: Mapped[str | None] = mapped_column(String(100))  # Supports state district names
 
     # Political affiliation
     party: Mapped[str | None] = mapped_column(String(50), index=True)
@@ -67,7 +67,7 @@ class GoldCandidate(Base, TimestampMixin):
 
     # Source references (for tracking)
     fec_candidate_id: Mapped[str | None] = mapped_column(String(20), unique=True)
-    state_candidate_id: Mapped[str | None] = mapped_column(String(50))
+    state_candidate_id: Mapped[str | None] = mapped_column(String(64))  # SHA-256 content hash
 
     def __repr__(self) -> str:
         return f"<GoldCandidate(id={self.id}, name={self.name}, office={self.office})>"
@@ -99,7 +99,9 @@ class GoldCommittee(Base, TimestampMixin):
 
     # Source references
     fec_committee_id: Mapped[str | None] = mapped_column(String(20), unique=True)
-    state_committee_id: Mapped[str | None] = mapped_column(String(50))
+    state_committee_id: Mapped[str | None] = mapped_column(
+        String(64)
+    )  # SHA-256 content hash or state ID
 
     # Status
     is_active: Mapped[bool] = mapped_column(nullable=False, default=True)

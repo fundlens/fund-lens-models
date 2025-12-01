@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.6.0] - 2025-12-01
+
+### Changed
+- Expanded `GoldCandidate.district` from VARCHAR(10) to VARCHAR(100) to support Maryland district names (e.g., "Congressional District 3", "Legislative District 41")
+- Expanded `GoldCandidate.state_candidate_id` from VARCHAR(50) to VARCHAR(64) to support SHA-256 content hashes
+- Expanded `GoldCommittee.state_committee_id` from VARCHAR(50) to VARCHAR(64) to support SHA-256 content hashes
+- Made `BronzeMarylandCommittee.registered_date` nullable to handle committees without registration dates
+
+### Notes
+- These changes enable full Maryland campaign finance data integration into the unified gold layer
+- Maryland uses SHA-256 content hashes (64 chars) as unique identifiers for candidates without source IDs
+- Maryland district names are descriptive strings rather than numeric codes
+
 ## [0.5.0] - 2025-12-01
 
 ### Added

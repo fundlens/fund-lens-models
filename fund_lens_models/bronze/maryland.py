@@ -71,7 +71,7 @@ class BronzeMarylandCommittee(Base, TimestampMixin, SourceMetadataMixin):
     election_type: Mapped[str | None] = mapped_column(
         String(255), nullable=True
     )  # e.g., "Gubernatorial Presidential"
-    registered_date: Mapped[str] = mapped_column(String(20))  # Keep as string
+    registered_date: Mapped[str | None] = mapped_column(String(20), nullable=True)  # Keep as string
     amended_date: Mapped[str | None] = mapped_column(String(20), nullable=True)
     chairperson_name: Mapped[str | None] = mapped_column(String(255), nullable=True)
     chairperson_address: Mapped[str | None] = mapped_column(String(500), nullable=True)  # Unparsed
