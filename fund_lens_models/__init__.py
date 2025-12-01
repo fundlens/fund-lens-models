@@ -1,6 +1,6 @@
 """Shared SQLAlchemy models for FundLens project."""
 
-__version__ = "0.4.0"
+__version__ = "0.5.0"
 
 from fund_lens_models import bronze, gold, silver
 from fund_lens_models.base import Base

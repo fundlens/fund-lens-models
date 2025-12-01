@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.5.0] - 2025-12-01
+
+### Added
+- Added Maryland silver layer models:
+  - `SilverMarylandContribution` - Cleaned contribution data with parsed dates, amounts, and addresses
+  - `SilverMarylandCommittee` - Cleaned committee data with parsed dates and active status
+  - `SilverMarylandCandidate` - Cleaned candidate data with committee linkage
+
+### Notes
+- Silver models include parsed address components (city, state, zip) extracted from raw address strings
+- Committee enrichment via name matching to link contributions and candidates to CCF IDs
+- Active status derived from status field values
+
 ## [0.4.0] - 2025-11-29
 
 ### Added
