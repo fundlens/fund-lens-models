@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.7.0] - 2025-12-02
+
+### Added
+- Added `office_raw` field to `GoldCandidate` to preserve original office names from source data before normalization (e.g., "County Commissioner President" vs normalized "COUNTY_COMM")
+- Added `jurisdiction_level` field to `GoldCandidate` for filtering by level of government (FEDERAL, STATE, COUNTY, CITY)
+- Added `office_county` field to `GoldCandidate` for county-level candidates (e.g., "Montgomery" for Montgomery County Council)
+- Added `office_city` field to `GoldCandidate` for city-level candidates (e.g., "Baltimore" for Baltimore City offices)
+- Added `first_election_year` and `last_election_year` fields to `GoldCandidate` for tracking election history
+
+### Changed
+- Made `BronzeMarylandContribution.contributor_name`, `contributor_address`, and `contributor_type` nullable to handle incomplete source records
+- Gold layer now only includes candidates who have filed for 2026+ election cycles (current/upcoming elections)
+- Committee-candidate linkage in gold layer only links to 2026+ candidates; historical candidate committees remain unlinked
+
+### Notes
+- These changes support the API/frontend use case of displaying current races and candidates with contribution statistics
+- The `office_raw` field enables displaying original office names while filtering by normalized office codes
+- Historical contributions to committees without linked 2026+ candidates are still tracked but not attributed to candidates
+
 ## [0.6.0] - 2025-12-01
 
 ### Changed

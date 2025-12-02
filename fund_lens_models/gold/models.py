@@ -55,14 +55,39 @@ class GoldCandidate(Base, TimestampMixin):
     name: Mapped[str] = mapped_column(String(500), nullable=False, index=True)
     office: Mapped[str] = mapped_column(
         String(20), nullable=False, index=True
-    )  # HOUSE, SENATE, PRESIDENT, GOVERNOR, etc.
+    )  # US_HOUSE, US_SENATE, STATE_HOUSE, STATE_SENATE, GOVERNOR, COUNTY_EXEC, etc.
+    office_raw: Mapped[str | None] = mapped_column(
+        String(200)
+    )  # Original office name from source (e.g., "County Commissioner President")
     state: Mapped[str | None] = mapped_column(String(2), index=True)
     district: Mapped[str | None] = mapped_column(String(100))  # Supports state district names
+
+    # Jurisdiction level - for easy filtering by level of government
+    # FEDERAL (US House, US Senate, President), STATE (Governor, State Legislature, etc),
+    # COUNTY (County Council, Sheriff, etc), CITY (Baltimore City offices)
+    jurisdiction_level: Mapped[str | None] = mapped_column(String(20), index=True)
+
+    # Office location for local candidates (where the office is, not candidate address)
+    office_county: Mapped[str | None] = mapped_column(
+        String(100), index=True
+    )  # For COUNTY jurisdiction candidates only
+    office_city: Mapped[str | None] = mapped_column(
+        String(100), index=True
+    )  # For CITY jurisdiction candidates only (e.g., Baltimore)
 
     # Political affiliation
     party: Mapped[str | None] = mapped_column(String(50), index=True)
 
-    # Status
+    # Election history tracking
+    # For FEC: from election_years field; For MD: from bronze election_year values
+    first_election_year: Mapped[int | None] = mapped_column(
+        Integer, index=True
+    )  # Earliest year filed
+    last_election_year: Mapped[int | None] = mapped_column(
+        Integer, index=True
+    )  # Most recent year filed
+
+    # Status - is_active means currently filed for upcoming/current election cycle
     is_active: Mapped[bool] = mapped_column(nullable=False, default=True)
 
     # Source references (for tracking)

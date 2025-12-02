@@ -28,9 +28,11 @@ class BronzeMarylandContribution(Base, TimestampMixin, SourceMetadataMixin):
     receiving_committee: Mapped[str] = mapped_column(String(255), index=True)
     filing_period: Mapped[str] = mapped_column(String(100))
     contribution_date: Mapped[str] = mapped_column(String(20))  # Keep as string in bronze
-    contributor_name: Mapped[str] = mapped_column(String(255))
-    contributor_address: Mapped[str] = mapped_column(String(500))  # Unparsed address
-    contributor_type: Mapped[str] = mapped_column(String(100))
+    contributor_name: Mapped[str | None] = mapped_column(String(255), nullable=True)
+    contributor_address: Mapped[str | None] = mapped_column(
+        String(500), nullable=True
+    )  # Unparsed address
+    contributor_type: Mapped[str | None] = mapped_column(String(100), nullable=True)
     contribution_type: Mapped[str] = mapped_column(String(100))
     contribution_amount: Mapped[str] = mapped_column(String(50))  # Keep as string in bronze
     employer_name: Mapped[str | None] = mapped_column(String(255), nullable=True)
